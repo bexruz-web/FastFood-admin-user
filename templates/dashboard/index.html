@@ -1,34 +1,28 @@
-{% extends 'base.html' %}
+{% extends 'dashboard/base.html' %}
 {% load static %}
-{% load humanize%}
+{% load humanize %}
 {% block content %}
 <div class="page-container">
-    {%include 'userbar.html'%}
+    {% include 'dashboard/userbar.html' %}
     <!-- HEADER DESKTOP-->
 
     <!-- MAIN CONTENT-->
     <div class="main-content">
         <div class="section__content section__content--p30">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="overview-wrap">
-                            <h2 class="title-1">overview</h2>
 
-                        </div>
-                    </div>
-                </div>
                 <div class="row m-t-25">
-                    <div class="col-sm-6 col-lg-4">
+
+                    <div class="col-sm-6 col-lg-3">
                         <div class="overview-item overview-item--c1">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
                                     <div class="icon">
-                                        <i class="fa-sharp fa-solid fa-list-radio"></i>
+                                      <i class="fa fa-list-alt"></i>
                                     </div>
                                     <div class="text">
-                                        <h2>1</h2>
-                                        <span>Count of Category</span>
+                                        <h2>{{ counts.categories|intcomma }}</h2>
+                                        <span>Count of Categories</span>
                                     </div>
                                 </div>
                                 <div class="overview-chart">
@@ -47,16 +41,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-4">
+
+                    <div class="col-sm-6 col-lg-3">
                         <div class="overview-item overview-item--c2">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
                                     <div class="icon">
-                                        <i class="fa-sharp fa-solid fa-list-radio"></i>
+                                        <i class="fa fa-list-alt"></i>
                                     </div>
                                     <div class="text">
-                                        <h2>2</h2>
-                                        <span>Count of Product </span>
+                                        <h2>{{ counts.products|intcomma }}</h2>
+                                        <span>Count of Products</span>
                                     </div>
                                 </div>
                                 <div class="overview-chart">
@@ -75,16 +70,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-4">
+
+                    <div class="col-sm-6 col-lg-3">
                         <div class="overview-item overview-item--c3">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
                                     <div class="icon">
-                                        <i class="fa-solid fa-users"></i>
+                                      <i class="fa fa-list-alt"></i>
                                     </div>
                                     <div class="text">
-                                        <h2>3</h2>
-                                        <span>Count of Customer</span>
+                                        <h2>{{ counts.orders|intcomma }}</h2>
+                                        <span>Count of Orders</span>
                                     </div>
                                 </div>
                                 <div class="overview-chart">
@@ -103,18 +99,17 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row m-t-25">
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="overview-item overview-item--c1">
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="overview-item overview-item--c4">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
                                     <div class="icon">
-                                        <i class="fa-sharp fa-solid fa-list-radio"></i>
+                                        <i class="fa fa-user"></i>
                                     </div>
                                     <div class="text">
-                                        <h2>4</h2>
-                                        <span>Count of Order</span>
+                                        <h2>{{ counts.customers|intcomma }}</h2>
+                                        <span>Count of Customers</span>
                                     </div>
                                 </div>
                                 <div class="overview-chart">
@@ -132,6 +127,35 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                </div>
+                <br><br><br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- DATA TABLE-->
+                        <h3 class="text-center">Top sold products</h3>
+                        <div class="table-responsive m-b-40">
+                            <table class="table table-borderless table-data3">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for t in table_list %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ t.title}}</td>
+                                        <td>{{ t.count }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- END DATA TABLE-->
                     </div>
                 </div>
             </div>
