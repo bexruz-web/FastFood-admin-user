@@ -26,10 +26,11 @@ class ProductForm(forms.ModelForm):
 
 
 class CustomerForm(forms.ModelForm):
-    model = Customer
-    fields = "__all__"
-    widgets = {
-        "first_name": forms.TextInput(attrs={'class': 'form-control'}),
-        "last_name": forms.TextInput(attrs={'class': 'form-control'}),
-        "phone_number": forms.TextInput(attrs={'class': 'form-control'}),
-    }
+    class Meta:
+        model = Customer
+        fields = "__all__"
+        widgets = {
+            "first_name": forms.TextInput(attrs={'class': 'form-control'}),
+            "last_name": forms.TextInput(attrs={'class': 'form-control'}),
+            "phone_number": forms.TextInput(attrs={'class': 'form-control'}),
+        }
