@@ -29,11 +29,11 @@ def get_table():
     with closing(connection.cursor()) as cursor:
         cursor.execute("""
             SELECT users_orderproduct.product_id, users_product.title,
-            COUNT(users_orderproduct.product_id) AS order_count
+            COUNT(users_orderproduct.product_id) AS count
             FROM users_orderproduct
             INNER JOIN  users_product ON users_orderproduct.product_id = users_product.id
             GROUP BY users_orderproduct.product_id, users_product.title
-            ORDER BY order_count DESC LIMIT 5
+            ORDER BY count DESC LIMIT 5
         """)
         table = dictfetchall(cursor)
         return table
@@ -47,14 +47,14 @@ def get_order_by_user(id):
             INNER JOIN users_customer ON users_customer.id = users_order.customer_id
             WHERE users_order.customer_id = %s
         """, [id])
+        order = dictfetchall(cursor)
+        return order
 
 
 def get_product_by_order(id):
     with closing(connection.cursor()) as cursor:
-        cursor.execute("""
-            SELECT users_orderproduct.count, users_orderproduct.price, users_orderproduct.created_at, users_product.title
-            FROM users_orderproduct
-            INNER JOIN users_product ON users_orderproduct.product_id = users_product_id
-            WHERE order_id = %s""", [id])
+        cursor.execute(""" SELECT users_orderproduct.count,users_orderproduct.price,users_orderproduct.created_at,users_product.title 
+                           FROM users_orderproduct 
+                           INNER JOIN users_product ON users_orderproduct.product_id=users_product.id  WHERE order_id=%s""", [id])
         orderproduct = dictfetchall(cursor)
         return orderproduct

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard',
     'users',
-    'django.contrib.humanize'
+    'django.contrib.humanize',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [

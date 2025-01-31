@@ -191,7 +191,7 @@ def order_list(request):
     ctx = {
         'orders': orders
     }
-    return render(request, 'dashboard/order/list.html')
+    return render(request, 'dashboard/order/list.html', ctx)
 
 
 @login_required_decorator
